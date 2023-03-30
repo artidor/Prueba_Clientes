@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Cor.Tarjeta>
+
+@{
+    ViewBag.Title = "ListadoTarjetas";
+  
+}
+
+<h2>ListadoTarjetas</h2>
+
+<p>
+    @*@Html.ActionLink("Atras", "Index", "Cliente")*@
+    @Html.ActionLink("Agregar Tarjeta", "Crear")
+
+</p>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Banco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Numero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ano)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.clientes.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo_Tarjeta1.Descripccion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Banco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Numero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ano)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.codCliente)
+        </td>
+        <td>
+            @Html.ActionLink("Editar tarjeta", "Editar", new { id = item.ID }) |
+                
+        </td>
+    </tr>
+}
+
+</table>

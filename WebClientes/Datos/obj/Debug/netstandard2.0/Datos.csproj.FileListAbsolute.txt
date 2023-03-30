@@ -1,0 +1,4 @@
+D:\Proyectos Programacion\WebClientes\Datos\bin\Debug\netstandard2.0\WebClientes.dll
+D:\Proyectos Programacion\WebClientes\Datos\obj\Debug\netstandard2.0\Datos.csprojAssemblyReference.cache
+D:\Proyectos Programacion\WebClientes\Datos\obj\Debug\netstandard2.0\Datos.AssemblyInfoInputs.cache
+D:\Proyectos Programacion\WebClientes\Datos\obj\Debug\netstandard2.0\Datos.AssemblyInfo.cs

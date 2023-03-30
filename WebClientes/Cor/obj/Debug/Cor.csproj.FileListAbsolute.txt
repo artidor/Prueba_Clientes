@@ -1,0 +1,11 @@
+D:\Proyectos Programacion\WebClientes\Cor\bin\Debug\Cor.dll.config
+D:\Proyectos Programacion\WebClientes\Cor\bin\Debug\Cor.dll
+D:\Proyectos Programacion\WebClientes\Cor\bin\Debug\Cor.pdb
+D:\Proyectos Programacion\WebClientes\Cor\bin\Debug\EntityFramework.dll
+D:\Proyectos Programacion\WebClientes\Cor\bin\Debug\EntityFramework.SqlServer.dll
+D:\Proyectos Programacion\WebClientes\Cor\bin\Debug\EntityFramework.xml
+D:\Proyectos Programacion\WebClientes\Cor\bin\Debug\EntityFramework.SqlServer.xml
+D:\Proyectos Programacion\WebClientes\Cor\obj\Debug\Cor.csprojAssemblyReference.cache
+D:\Proyectos Programacion\WebClientes\Cor\obj\Debug\Cor.csproj.CopyComplete
+D:\Proyectos Programacion\WebClientes\Cor\obj\Debug\Cor.dll
+D:\Proyectos Programacion\WebClientes\Cor\obj\Debug\Cor.pdb

@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ClienteDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="clientes">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Ocupacion" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tarjeta">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo_Tarjeta" Type="int" Nullable="false" />
+          <Property Name="Banco" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Numero" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Mes" Type="int" Nullable="false" />
+          <Property Name="Ano" Type="int" Nullable="false" />
+          <Property Name="codCliente" Type="int" />
+        </EntityType>
+        <EntityType Name="Tipo_Tarjeta">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripccion" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_Tarjeta_clientes">
+          <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+          <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clientes">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Tarjeta">
+              <PropertyRef Name="codCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tarjeta_Tipo_Tarjeta">
+          <End Role="Tipo_Tarjeta" Type="Self.Tipo_Tarjeta" Multiplicity="1" />
+          <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Tarjeta">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tarjeta">
+              <PropertyRef Name="Tipo_Tarjeta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClienteDBModelStoreContainer">
+          <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tarjeta" EntityType="Self.Tarjeta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Tarjeta" EntityType="Self.Tipo_Tarjeta" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tarjeta_clientes" Association="Self.FK_Tarjeta_clientes">
+            <End Role="clientes" EntitySet="clientes" />
+            <End Role="Tarjeta" EntitySet="Tarjeta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tarjeta_Tipo_Tarjeta" Association="Self.FK_Tarjeta_Tipo_Tarjeta">
+            <End Role="Tipo_Tarjeta" EntitySet="Tipo_Tarjeta" />
+            <End Role="Tarjeta" EntitySet="Tarjeta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClienteDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="clientes">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ocupacion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tarjeta" Relationship="Self.FK_Tarjeta_clientes" FromRole="clientes" ToRole="Tarjeta" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tarjeta">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo_Tarjeta" Type="Int32" Nullable="false" />
+          <Property Name="Banco" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Numero" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mes" Type="Int32" Nullable="false" />
+          <Property Name="Ano" Type="Int32" Nullable="false" />
+          <Property Name="codCliente" Type="Int32" />
+          <NavigationProperty Name="clientes" Relationship="Self.FK_Tarjeta_clientes" FromRole="Tarjeta" ToRole="clientes" />
+          <NavigationProperty Name="Tipo_Tarjeta1" Relationship="Self.FK_Tarjeta_Tipo_Tarjeta" FromRole="Tarjeta" ToRole="Tipo_Tarjeta" />
+        </EntityType>
+        <EntityType Name="Tipo_Tarjeta">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripccion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tarjeta" Relationship="Self.FK_Tarjeta_Tipo_Tarjeta" FromRole="Tipo_Tarjeta" ToRole="Tarjeta" />
+        </EntityType>
+        <Association Name="FK_Tarjeta_clientes">
+          <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+          <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clientes">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Tarjeta">
+              <PropertyRef Name="codCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tarjeta_Tipo_Tarjeta">
+          <End Role="Tipo_Tarjeta" Type="Self.Tipo_Tarjeta" Multiplicity="1" />
+          <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Tarjeta">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tarjeta">
+              <PropertyRef Name="Tipo_Tarjeta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClienteDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="clientes" EntityType="Self.clientes" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tarjeta" EntityType="Self.Tarjeta" />
+          <EntitySet Name="Tipo_Tarjeta" EntityType="Self.Tipo_Tarjeta" />
+          <AssociationSet Name="FK_Tarjeta_clientes" Association="Self.FK_Tarjeta_clientes">
+            <End Role="clientes" EntitySet="clientes" />
+            <End Role="Tarjeta" EntitySet="Tarjeta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tarjeta_Tipo_Tarjeta" Association="Self.FK_Tarjeta_Tipo_Tarjeta">
+            <End Role="Tipo_Tarjeta" EntitySet="Tipo_Tarjeta" />
+            <End Role="Tarjeta" EntitySet="Tarjeta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClienteDBModelStoreContainer" CdmEntityContainer="ClienteDBEntities">
+          <EntitySetMapping Name="clientes">
+            <EntityTypeMapping TypeName="ClienteDBModel.clientes">
+              <MappingFragment StoreEntitySet="clientes">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Ocupacion" ColumnName="Ocupacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ClienteDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tarjeta">
+            <EntityTypeMapping TypeName="ClienteDBModel.Tarjeta">
+              <MappingFragment StoreEntitySet="Tarjeta">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tipo_Tarjeta" ColumnName="Tipo_Tarjeta" />
+                <ScalarProperty Name="Banco" ColumnName="Banco" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="Ano" ColumnName="Ano" />
+                <ScalarProperty Name="codCliente" ColumnName="codCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Tarjeta">
+            <EntityTypeMapping TypeName="ClienteDBModel.Tipo_Tarjeta">
+              <MappingFragment StoreEntitySet="Tipo_Tarjeta">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descripccion" ColumnName="Descripccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
